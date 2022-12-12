@@ -4,12 +4,10 @@
         "es2021": true
     },
     "extends": [
-				"next/core-web-vitals",
+		"next/core-web-vitals",
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended"
-    ],
-    "overrides": [
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -19,8 +17,8 @@
     "plugins": [
         "react",
         "@typescript-eslint",
-				"react-hooks",
-				"autofix"
+		"react-hooks",
+		"autofix"
     ],
     "rules": {
         "linebreak-style": [
@@ -31,11 +29,11 @@
             "error",
             "single"
         ],
-				"react-hooks/rules-of-hooks": "error",
-				"react-hooks/exhaustive-deps": "error",
-				"arrow-body-style": ["error", "as-needed"],
-				"no-console": "warn",
-				"no-unused-vars": "off",
-    		"@typescript-eslint/no-unused-vars": ["error"]
+		"react-hooks/rules-of-hooks": "error",
+		"react-hooks/exhaustive-deps": "error",
+		"arrow-body-style": ["error", "as-needed"],
+		"no-console": "warn",
+		"no-unused-vars": "off",
+    	"@typescript-eslint/no-unused-vars": ["error"]
     }
 }
