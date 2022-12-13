@@ -19,7 +19,7 @@
   "plugins": ["react", "@typescript-eslint", "react-hooks", "autofix"],
   "rules": {
     "linebreak-style": ["error", "unix"],
-    "quotes": ["error", "single"],
+    "quotes": [0, "single"],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "error",
     "arrow-body-style": ["error", "as-needed"],
