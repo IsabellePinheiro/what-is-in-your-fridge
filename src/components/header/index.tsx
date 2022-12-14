@@ -14,7 +14,7 @@ export default function Header() {
           alt="Logo"
           className="mr-6"
         />
-        <h1 className="text-ignite-500 text-3xl font-bold leading-tight">
+        <h1 className="text-green-500 text-3xl font-bold leading-tight">
           WHAT'S IN YOUR FRIDGE?
         </h1>
       </div>
