@@ -4,7 +4,7 @@ import logo from "../../assets/logo.svg";
 
 export default function Header() {
   return (
-    <header className="flex py-4 px-8 flex-row justify-between">
+    <header className="flex py-4 flex-row justify-between">
       <div className="flex  justify-center items-center">
         <Image
           quality={100}
