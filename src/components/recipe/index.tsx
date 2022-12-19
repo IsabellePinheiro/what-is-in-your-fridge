@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 
 import recipe from "../../assets/fudge.webp";
 
@@ -8,10 +7,8 @@ import recipe from "../../assets/fudge.webp";
 
 export default function Recipe() {
   return (
-    <motion.main
-      className="flex p-4 flex-row bg-gray-300 border border-gray-400 hover:border-gray-900 max-w-max hover:cursor-pointer"
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.9 }}
+    <main
+      className="flex p-4 flex-row bg-gray-300 border border-gray-400 transition ease-in-out delay-150 hover:border-gray-900 max-w-max hover:cursor-pointer hover:-translate-y-1 hover:scale-110 hover:bg-gray-200 duration-300"
     >
       <Image
         quality={100}
@@ -25,7 +22,7 @@ export default function Recipe() {
         <span className="text-gray-600 text-1xl font-bold leading-tight">
           MILK CHOCOLATE
         </span>
-        <h2 className="text-gray-800 text-2xl font-bold leading-tight  mt-4 mb-2">
+        <h2 className="text-gray-800 text-2xl font-bold leading-tight mt-4 mb-2">
           Creamy Chocolate Fudge
         </h2>
         <span className="text-gray-500 text-base leading-tight">
@@ -33,6 +30,6 @@ export default function Recipe() {
           place! You'll come back to this creamy fudge recipe again and again.
         </span>
       </div>
-    </motion.main>
+    </main>
   );
 }
