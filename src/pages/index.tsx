@@ -8,7 +8,7 @@ export default function Home() {
     <div className="px-8 ">
       <Header />
       <Recipe />
-      <SearchBar/>
+      <SearchBar placeholder='TYPE YOUR INGREDIENTS HERE'/>
     </div>
   );
 }
