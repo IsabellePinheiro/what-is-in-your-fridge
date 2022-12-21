@@ -11,8 +11,6 @@
     "pre-commit": "lint-staged"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.5",
-    "@heroicons/react": "^2.0.13",
     "@next/bundle-analyzer": "^13.0.7",
     "eslint-config-next": "13.0.6",
     "next": "13.0.6",
