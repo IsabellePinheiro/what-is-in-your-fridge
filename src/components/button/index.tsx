@@ -1,16 +1,17 @@
 import React from "react";
 
-interface IButton {
-  text: string;
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  title: string;
 }
 
-export default function Button({ text }: IButton) {
+export default function Button({ title,  ...props }: ButtonProps) {
   return (
     <button
       className="bg-gray-500 px-6 py-4 rounded text-gray-900 font-bold text-sm uppercase hover:bg-yellow-700"
       type="submit"
+      {...props}
     >
-      {text}
+      {title}
     </button>
   );
 }
