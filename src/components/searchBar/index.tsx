@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 
-interface SearchBarProps {
-  placeholder: string;
-}
-
-export default function SearchBar({ placeholder }: SearchBarProps) {
+export default function SearchBar() {
   const [value, setValue] = useState("");
 
   return (
@@ -15,7 +11,7 @@ export default function SearchBar({ placeholder }: SearchBarProps) {
       onChange={(event) => {
         setValue(event.target.value);
       }}
-      placeholder={placeholder}
+      placeholder="TYPE YOUR INGREDIENTS HERE"
     />
   );
 }

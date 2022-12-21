@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="px-8 ">
       <Header />
-      <SearchBar placeholder="TYPE YOUR INGREDIENTS HERE" />
+      <SearchBar />
     </div>
   );
 }
