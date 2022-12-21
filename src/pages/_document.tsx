@@ -17,7 +17,7 @@ export default function Document() {
         />
         <link href="/dist/output.css" rel="stylesheet" />
       </Head>
-      <body className="bg-gray-100 bg-app bg-no-repeat bg-cover">
+      <body className="bg-gray-100 bg-no-repeat bg-cover">
         <Main />
         <NextScript />
       </body>
