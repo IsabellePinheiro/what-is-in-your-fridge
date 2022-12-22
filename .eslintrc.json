@@ -7,10 +7,8 @@
     "next/core-web-vitals",
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended",
-    "prettier"
+    "plugin:@typescript-eslint/recommended"
   ],
-  "overrides": [],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
@@ -25,6 +23,8 @@
     "arrow-body-style": ["error", "as-needed"],
     "no-console": "warn",
     "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": ["error"]
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "react/no-unescaped-entities": 0,
+    "@next/next/no-css-tags": "off"
   }
 }
