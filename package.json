@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky install",
-    "pre-commit": "lint-staged"
+    "pre-commit": "lint-staged",
+    "prepublishOnly": "agadoo",
+    "analyze": "ANALYZE=1 npm run build"
   },
   "dependencies": {
     "@next/bundle-analyzer": "^13.0.7",
@@ -26,6 +28,7 @@
     "@types/react-dom": "^18.0.9",
     "@typescript-eslint/eslint-plugin": "^5.46.0",
     "@typescript-eslint/parser": "^5.46.0",
+    "agadoo": "^3.0.0",
     "autoprefixer": "^10.4.13",
     "eslint": "^8.29.0",
     "eslint-config-prettier": "^8.5.0",

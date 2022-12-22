@@ -7,9 +7,7 @@ import recipe from "../../assets/fudge.webp";
 
 export default function Recipe() {
   return (
-    <main
-      className="flex p-4 flex-row bg-gray-300 border border-gray-400 transition ease-in-out delay-150 hover:border-gray-900 max-w-max hover:cursor-pointer hover:-translate-y-1 hover:scale-110 hover:bg-gray-200 duration-300"
-    >
+    <main className="flex p-4 flex-row bg-gray-300 border border-gray-400 transition ease-in-out delay-150 hover:border-gray-900 max-w-max hover:cursor-pointer hover:-translate-y-1 hover:scale-110 hover:bg-gray-200 duration-300">
       <Image
         quality={100}
         width={200}
