@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="px-8 ">
       <Header />
-      <Button title="Search" />
+      <Button>SEARCH</Button>
     </div>
   );
 }
