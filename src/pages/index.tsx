@@ -7,8 +7,8 @@ export default function Home() {
   return (
     <div className="px-8 ">
       <Header />
-      <Button>SEARCH</Button>
       <SearchBar />
+      <Button>SEARCH</Button>
     </div>
   );
 }
