@@ -1,28 +1,37 @@
 import React, { useCallback, useState } from "react";
+import { useQuery } from "react-query";
 
-interface SearchResultListProps {
+export interface SearchResultListProps {
   id: number;
   name: string;
 }
 
 export default function SearchBar() {
-  const [value, setValue] = useState("");
-  const [searchResultList, setSearchResultList] = useState<SearchResultListProps[]>([]);
-  const [selectedIngredientsList, setSelectedIngredientsList] = useState<SearchResultListProps[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedIngredientsList, setSelectedIngredientsList] = useState<
+    SearchResultListProps[]
+  >([]);
 
-  const handleChangeInput = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      event.preventDefault();
-      setValue(event.target.value);
-      fetch(
-        `https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=${process.env.NEXT_PUBLIC_SPOONACULAR_API_KEY}&query=${event.target.value}&number=10`
-      )
-        .then((res) => res.json())
-        .then((result) => {
-          setSearchResultList(result);
-        });
-    },
-    []
+  const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    setSearchQuery(event.target.value);
+    refetch();
+  };
+
+  const getIngredients = async () => {
+    const response = await fetch(
+      `https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=${process.env.NEXT_PUBLIC_SPOONACULAR_API_KEY}&query=${searchQuery}&number=10`
+    );
+    return response.json();
+  };
+
+  const { isLoading, error, data, refetch } = useQuery(
+    "ingredients",
+    getIngredients,
+    {
+      enabled: false,
+      refetchOnWindowFocus: false,
+    }
   );
 
   const handleSelectIngredient = useCallback(
@@ -39,7 +48,9 @@ export default function SearchBar() {
   );
 
   const handleDeleteIngredient = useCallback((index: number) => {
-    setSelectedIngredientsList((prevState) => prevState.filter((item) => item.id !== index));
+    setSelectedIngredientsList((prevState) =>
+      prevState.filter((item) => item.id !== index)
+    );
   }, []);
 
   return (
@@ -47,13 +58,23 @@ export default function SearchBar() {
       <input
         className="flex w-full mt-4 px-6 py-4 rounded bg-gray-300 border border-gray-600 text-sm text-gray-900"
         type="text"
-        value={value}
+        value={searchQuery}
         onChange={handleChangeInput}
         placeholder="TYPE YOUR INGREDIENTS HERE"
       />
-      {searchResultList && (
+      {isLoading && (
+        <strong className="px-2 py-4  text-teal-600 hover:text-teal-900">
+          Loading
+        </strong>
+      )}
+      {error && (
+        <strong className="px-2 py-4  text-teal-600 hover:text-teal-900">
+          Error
+        </strong>
+      )}
+      {data && searchQuery && (
         <ul>
-          {searchResultList.map((item, index) => (
+          {data?.map((item: SearchResultListProps, index: React.Key) => (
             <li
               key={index}
               className="bg-teal-100 h-8 cursor-pointer"
@@ -75,7 +96,8 @@ export default function SearchBar() {
             <span>{ingredient.name}</span>
             <button
               className="bg-gray-100 cursor-pointer w-fit border border-gray-600 p-1 ml-2"
-              onClick={() => handleDeleteIngredient(ingredient.id)}>
+              onClick={() => handleDeleteIngredient(ingredient.id)}
+            >
               x
             </button>
           </div>
