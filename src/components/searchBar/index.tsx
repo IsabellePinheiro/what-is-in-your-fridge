@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { useQuery } from "react-query";
+import * as api from "../../services/api";
 
 export interface SearchResultListProps {
   id: number;
@@ -15,23 +16,21 @@ export default function SearchBar() {
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     setSearchQuery(event.target.value);
-    refetch();
+    // refetch();
   };
 
-  const getIngredients = async () => {
-    const response = await fetch(
-      `https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=${process.env.NEXT_PUBLIC_SPOONACULAR_API_KEY}&query=${searchQuery}&number=10`
-    );
-    return response.json();
-  };
-
-  const { isLoading, error, data, refetch } = useQuery(
-    "ingredients",
-    getIngredients,
-    {
-      enabled: false,
-      refetchOnWindowFocus: false,
+  async function getIngredients(searchQuery: string) {
+    try {
+      const response = await api.getIngredients(searchQuery);
+      return response;
+    } catch (error) {
+      alert((error as Error).message);
     }
+  }
+
+  const { isLoading, error, data } = useQuery(
+    ["ingredients", searchQuery],
+    () => getIngredients(searchQuery)
   );
 
   const handleSelectIngredient = useCallback(
