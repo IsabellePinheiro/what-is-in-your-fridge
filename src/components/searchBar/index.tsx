@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { useQuery } from "react-query";
-import * as api from "../../services/api";
+import * as api from '../../services/api'
 
 export interface SearchResultListProps {
   id: number;
@@ -16,19 +16,19 @@ export default function SearchBar() {
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     setSearchQuery(event.target.value);
-    // refetch();
   };
+
 
   async function getIngredients(searchQuery: string) {
     try {
       const response = await api.getIngredients(searchQuery);
-      return response;
+      return response
     } catch (error) {
-      alert((error as Error).message);
+       alert((error as Error).message);
     }
   }
 
-  const { isLoading, error, data } = useQuery(
+  const { isLoading, error, data:ingredients } = useQuery(
     ["ingredients", searchQuery],
     () => getIngredients(searchQuery)
   );
@@ -62,18 +62,18 @@ export default function SearchBar() {
         placeholder="TYPE YOUR INGREDIENTS HERE"
       />
       {isLoading && (
-        <strong className="px-2 py-4  text-teal-600 hover:text-teal-900">
+        <strong className="px-2 py-4 text-teal-600 hover:text-teal-900">
           Loading
         </strong>
       )}
       {error && (
-        <strong className="px-2 py-4  text-teal-600 hover:text-teal-900">
+        <strong className="px-2 py-4 text-teal-600 hover:text-teal-900">
           Error
         </strong>
       )}
-      {data && searchQuery && (
+      {ingredients && searchQuery && (
         <ul>
-          {data?.map((item: SearchResultListProps, index: React.Key) => (
+          {ingredients?.map((item: SearchResultListProps, index: React.Key) => (
             <li
               key={index}
               className="bg-teal-100 h-8 cursor-pointer"
