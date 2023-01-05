@@ -1,37 +1,39 @@
 import React, { useCallback, useState } from "react";
 import { useQuery } from "react-query";
-import * as api from '../../services/api'
+import { atom, useAtom } from "jotai";
+import * as api from "../../services/api";
 
 export interface SearchResultListProps {
   id: number;
   name: string;
 }
 
+export const searchAtom = atom<SearchResultListProps[]>([]);
+
 export default function SearchBar() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedIngredientsList, setSelectedIngredientsList] = useState<
-    SearchResultListProps[]
-  >([]);
+  const [selectedIngredientsList, setSelectedIngredientsList] =
+    useAtom(searchAtom);
 
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     setSearchQuery(event.target.value);
   };
 
-
   async function getIngredients(searchQuery: string) {
     try {
       const response = await api.getIngredients(searchQuery);
-      return response
+      return response;
     } catch (error) {
-       alert((error as Error).message);
+      alert((error as Error).message);
     }
   }
 
-  const { isLoading, error, data:ingredients } = useQuery(
-    ["ingredients", searchQuery],
-    () => getIngredients(searchQuery)
-  );
+  const {
+    isLoading,
+    error,
+    data: ingredients,
+  } = useQuery(["ingredients", searchQuery], () => getIngredients(searchQuery));
 
   const handleSelectIngredient = useCallback(
     (ingredient: SearchResultListProps) => {
@@ -43,14 +45,17 @@ export default function SearchBar() {
         },
       ]);
     },
-    []
+    [setSelectedIngredientsList]
   );
 
-  const handleDeleteIngredient = useCallback((index: number) => {
-    setSelectedIngredientsList((prevState) =>
-      prevState.filter((item) => item.id !== index)
-    );
-  }, []);
+  const handleDeleteIngredient = useCallback(
+    (index: number) => {
+      setSelectedIngredientsList((prevState) =>
+        prevState.filter((item) => item.id !== index)
+      );
+    },
+    [setSelectedIngredientsList]
+  );
 
   return (
     <>
