@@ -4,8 +4,8 @@ import React from "react";
 interface RecipeProps {
   title: string;
   image: string;
-  cuisines: string[];
-  summary: string;
+  cuisines?: string[];
+  summary?: string;
 }
 
 export default function Recipe({
@@ -14,9 +14,12 @@ export default function Recipe({
   cuisines,
   summary,
 }: RecipeProps) {
-
   return (
-    <main className={`flex p-4 mt-4 ${summary ? 'flex-row' : 'flex-col'} bg-gray-300 border border-gray-400 transition ease-in-out delay-150 hover:border-gray-900  hover:cursor-pointer hover:-translate-y-1 hover:scale-110 hover:bg-gray-200 duration-300`}>
+    <main
+      className={`flex p-4 mt-4 ${
+        summary ? "flex-row" : "flex-col"
+      } bg-gray-300 border border-gray-400 transition ease-in-out delay-150 hover:border-gray-900  hover:cursor-pointer hover:-translate-y-1 hover:scale-110 hover:bg-gray-200 duration-300`}
+    >
       <Image
         quality={100}
         width={200}

@@ -15,20 +15,26 @@ interface RecipeResult {
 }
 
 export default function Home() {
-  const [search] = useAtom(searchAtom);
+  const [searchRecipesResult] = useAtom(searchAtom);
   const [recipes, setRecipes] = useState<RecipeResult[]>([]);
 
   async function handleSearchRecipes() {
-    if (search.length) {
-      const formattedIngredientsUrl = search
-        .map((ingredient, index) => `${index > 0 ? "+" : ""}${ingredient.name}`)
-        .join(`,`);
+    if (searchRecipesResult.length) {
+      try {
+        const formattedIngredientsUrl = searchRecipesResult
+          .map(
+            (ingredient, index) => `${index > 0 ? "+" : ""}${ingredient.name}`
+          )
+          .join(`,`);
 
-      const response = await api.searchRecipesByIngredients(
-        formattedIngredientsUrl
-      );
-      setRecipes(response);
-      return;
+        const response = await api.searchRecipesByIngredients(
+          formattedIngredientsUrl
+        );
+        setRecipes(response);
+        return;
+      } catch (error) {
+        alert((error as Error).message);
+      }
     }
     try {
       const response = await api.getRandomRecipes();
