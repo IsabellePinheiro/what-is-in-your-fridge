@@ -1,56 +1,56 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState } from "react"
 
 interface IngredientProps {
-  id: string;
-  name: string;
+  id: number
+  name: string
 }
 
 export default function SearchBar() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [ingredients, setIngredients] = useState<IngredientProps[]>([]);
-  const [selectedIngredients, setSelectedIngredients] = useState<IngredientProps[]>([]);
+  const [searchQuery, setSearchQuery] = useState("")
+  const [ingredients, setIngredients] = useState<IngredientProps[]>([])
+  const [selectedIngredients, setSelectedIngredients] = useState<
+    IngredientProps[]
+  >([])
 
   const handleChangeInput = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      event.preventDefault();
-      setSearchQuery(event.target.value);
+      event.preventDefault()
+      setSearchQuery(event.target.value)
       fetch(
-        `https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=${process.env.NEXT_PUBLIC_SPOONACULAR_API_KEY}&query=${event.target.value}&number=10`
+        `https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=${process.env.NEXT_PUBLIC_SPOONACULAR_API_KEY}&query=${event.target.value}&number=10&metaInformation=true`
       )
         .then((res) => res.json())
         .then((result) => {
-          setIngredients(result);
-        });
+          console.log(result)
+          setIngredients(result)
+        })
     },
     []
-  );
-
-  const generateKey = (pre: IngredientProps) =>  `${ pre.name.trim() }_${ new Date().valueOf() }`;
-
+  )
 
   const handleSelectIngredient = useCallback(
     (ingredient: IngredientProps) => {
-      if(selectedIngredients.some((selected) => selected.name === ingredient.name)){
-        alert('Ingredient already selected. Please, choose another one.')
-        return;
+      if (
+        selectedIngredients.some(
+          (selected) => selected.name === ingredient.name
+        )
+      ) {
+        alert("Ingredient already selected. Please, choose another one.")
+        return
       }
-      setSelectedIngredients((current) => [
-        ...current,
+      setSelectedIngredients((prev) => [
+        ...prev,
         {
           ...ingredient,
-          id: generateKey(ingredient),
         },
-      ]);
+      ])
     },
     [selectedIngredients]
-    );
+  )
 
-
-  const handleDeleteIngredient = useCallback((index: string) => {
-    setSelectedIngredients((prevState) => prevState.filter((item) => item.id !== index));
-  }, []);
-
-
+  const handleDeleteIngredient = useCallback((index: number) => {
+    setSelectedIngredients((prev) => prev.filter((item) => item.id !== index))
+  }, [])
 
   return (
     <>
@@ -62,10 +62,10 @@ export default function SearchBar() {
         placeholder="TYPE YOUR INGREDIENTS HERE"
       />
       {ingredients.length > 0 && (
-        <ul> 
+        <ul>
           {ingredients.map((item) => (
             <li
-              key={ generateKey(item) + Math.random()}
+              key={item.id}
               className="bg-teal-100 h-8 cursor-pointer"
               onClick={() => handleSelectIngredient(item)}
             >
@@ -85,12 +85,13 @@ export default function SearchBar() {
             <span>{ingredient.name}</span>
             <button
               className="bg-gray-100 cursor-pointer w-fit border border-gray-600 p-1 ml-2"
-              onClick={() => handleDeleteIngredient(ingredient.id)}>
+              onClick={() => handleDeleteIngredient(ingredient.id)}
+            >
               x
             </button>
           </div>
         ))}
       </div>
     </>
-  );
+  )
 }

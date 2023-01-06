@@ -1,7 +1,7 @@
-import React from "react";
-import Image from "next/image";
+import React from "react"
+import Image from "next/image"
 
-import recipe from "../../assets/fudge.webp";
+import recipe from "../../assets/fudge.webp"
 
 /** TODO: Populate data from spoonacular api */
 
@@ -29,5 +29,5 @@ export default function Recipe() {
         </span>
       </div>
     </main>
-  );
+  )
 }

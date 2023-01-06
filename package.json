@@ -7,9 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "npm run lint -- --fix",
+    "prettier": "npx prettier src test --check",
+    "prettier:fix": "npm run prettier -- --write",
     "prepare": "husky install",
     "pre-commit": "lint-staged",
-    "analyze": "ANALYZE=1 npm run build"
+    "analyze": "ANALYZE=1 npm run build",
+    "format": "npm run prettier:fix && npm run lint:fix"
   },
   "dependencies": {
     "@next/bundle-analyzer": "^13.0.7",

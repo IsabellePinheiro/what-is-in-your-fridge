@@ -1,6 +1,6 @@
-import React from "react";
-import Image from "next/image";
-import logo from "../../assets/logo.svg";
+import React from "react"
+import Image from "next/image"
+import logo from "../../assets/logo.svg"
 
 export default function Header() {
   return (
@@ -22,5 +22,5 @@ export default function Header() {
         <a className="text-gray-900">Log In</a>
       </div>
     </header>
-  );
+  )
 }

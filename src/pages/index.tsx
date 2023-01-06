@@ -1,7 +1,7 @@
-import React from "react";
-import Button from "../components/button";
-import Header from "../components/header";
-import SearchBar from "../components/searchBar";
+import React from "react"
+import Button from "../components/button"
+import Header from "../components/header"
+import SearchBar from "../components/searchBar"
 
 export default function Home() {
   return (
@@ -10,5 +10,5 @@ export default function Home() {
       <SearchBar />
       <Button>SEARCH</Button>
     </div>
-  );
+  )
 }
